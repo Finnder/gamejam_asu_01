@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://ctmlk65sbty8c"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_khe1j"]
+[ext_resource type="Texture2D" uid="uid://davoufqhyj0m8" path="res://Assets/Characters/Goblin/Run.png" id="2_xnrne"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g0ok"]
+atlas = ExtResource("2_xnrne")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owadm"]
+atlas = ExtResource("2_xnrne")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_km0vb"]
+atlas = ExtResource("2_xnrne")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysk32"]
+atlas = ExtResource("2_xnrne")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj38t"]
+atlas = ExtResource("2_xnrne")
+region = Rect2(600, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnwkw"]
+atlas = ExtResource("2_xnrne")
+region = Rect2(750, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugwsj"]
+atlas = ExtResource("2_xnrne")
+region = Rect2(900, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tt0k"]
+atlas = ExtResource("2_xnrne")
+region = Rect2(1050, 0, 150, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2c66a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g0ok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owadm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_km0vb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysk32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj38t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnwkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugwsj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tt0k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="enemy" type="Node2D"]
+script = ExtResource("1_khe1j")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2c66a")
+frame_progress = 0.0686262

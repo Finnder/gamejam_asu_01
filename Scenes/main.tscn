@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://djgcgwi3mfrg2"]
+
+[ext_resource type="PackedScene" uid="uid://dy86xl8l5pa48" path="res://Scenes/player.tscn" id="1_sx6rq"]
+[ext_resource type="Texture2D" uid="uid://c70gl6glholhg" path="res://Assets/Envirement/background.png" id="2_k774o"]
+[ext_resource type="Texture2D" uid="uid://ci4gl2g3uh6fn" path="res://Assets/Envirement/middleground.png" id="3_wfyt8"]
+[ext_resource type="AudioStream" uid="uid://faeyut8lq26j" path="res://Assets/Sounds/Music/rpg_village02_loop.mp3" id="4_oqdmu"]
+[ext_resource type="Script" path="res://Scripts/SpawnManager.gd" id="5_5322j"]
+
+[node name="Main" type="Node2D"]
+texture_filter = 1
+
+[node name="envirement" type="Node2D" parent="."]
+texture_filter = 1
+position = Vector2(-72, 5)
+scale = Vector2(1.79481, 1.60537)
+
+[node name="Sprite2D2" type="Sprite2D" parent="envirement"]
+modulate = Color(0.215686, 0.215686, 0.215686, 1)
+position = Vector2(34.5, 0)
+scale = Vector2(1.17969, 1)
+texture = ExtResource("2_k774o")
+
+[node name="Sprite2D" type="Sprite2D" parent="envirement"]
+modulate = Color(0.215686, 0.215686, 0.215686, 1)
+texture = ExtResource("3_wfyt8")
+
+[node name="Sprite2D3" type="Sprite2D" parent="envirement"]
+modulate = Color(0.317647, 0.317647, 0.317647, 1)
+position = Vector2(34, 0)
+scale = Vector2(1.17708, 1)
+texture = ExtResource("3_wfyt8")
+
+[node name="player" parent="." instance=ExtResource("1_sx6rq")]
+position = Vector2(-1, 123)
+scale = Vector2(1.5, 1.5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+
+[node name="AudioStreamPlayer_BG" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oqdmu")
+volume_db = -25.0
+pitch_scale = 0.8
+autoplay = true
+mix_target = 1
+
+[node name="Spawners" type="Node2D" parent="."]
+script = ExtResource("5_5322j")
+
+[node name="spawner_left" type="Node2D" parent="Spawners"]
+position = Vector2(-342, 139)
+
+[node name="spawner_right" type="Node2D" parent="Spawners"]
+position = Vector2(353, 138)
+
+[node name="GlobalUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="GlobalUI"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 96.0
+offset_right = 90.0
+offset_bottom = 174.0
+color = Color(0.992157, 0.537255, 0.431373, 0.054902)
+
+[node name="ColorRect2" type="ColorRect" parent="GlobalUI"]
+layout_mode = 0
+offset_left = -87.0
+offset_top = 95.0
+offset_right = -47.0
+offset_bottom = 173.0
+color = Color(0.992157, 0.537255, 0.431373, 0.054902)

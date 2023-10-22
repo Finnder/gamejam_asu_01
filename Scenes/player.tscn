@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy86xl8l5pa48"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_2fobm"]
+[ext_resource type="SpriteFrames" uid="uid://clsjdx7wxt1r0" path="res://Assets/SpriteFrames/01_character_sprite_frames.tres" id="1_garf7"]
+
+[node name="player" type="Node2D"]
+script = ExtResource("1_2fobm")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("1_garf7")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.655831
