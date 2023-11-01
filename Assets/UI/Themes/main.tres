@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b8m300sjvsmdl"]
+
+[ext_resource type="FontFile" uid="uid://dcmgls30pskek" path="res://Assets/UI/Fonts/CloisterBlack.ttf" id="1_nio0i"]
+
+[resource]
+default_font = ExtResource("1_nio0i")
+default_font_size = 30

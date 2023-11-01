@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://de0vu4y84nxuu"]
+
+[ext_resource type="Theme" uid="uid://b8m300sjvsmdl" path="res://Assets/UI/Themes/main.tres" id="1_t38ba"]
+
+[sub_resource type="Animation" id="Animation_hb4dc"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, -10), Vector2(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_ibghv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jllgc"]
+_data = {
+"RESET": SubResource("Animation_ibghv"),
+"idle": SubResource("Animation_hb4dc")
+}
+
+[node name="UpgradeCard" type="Control"]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 3
+anchor_right = 0.104
+anchor_bottom = 0.309
+offset_top = 1.0
+offset_right = 340.4
+offset_bottom = 501.232
+scale = Vector2(0.600794, 0.668309)
+
+[node name="ColorRectBorder" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -2.59201
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.168627, 0.168627, 0.168627, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_jllgc")
+}
+
+[node name="LabelTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 608.0
+offset_bottom = 140.0
+scale = Vector2(0.35548, 0.34027)
+theme = ExtResource("1_t38ba")
+theme_override_font_sizes/font_size = 90
+text = "title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelDescription" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 97.0
+offset_right = 580.0
+offset_bottom = 685.0
+scale = Vector2(0.35548, 0.34027)
+theme = ExtResource("1_t38ba")
+theme_override_colors/font_color = Color(0.529412, 0.772549, 0.721569, 1)
+theme_override_font_sizes/font_size = 90
+text = "Increase Damage By
+1"
+horizontal_alignment = 1
+autowrap_mode = 3

@@ -1,13 +1,61 @@
-[gd_scene load_steps=6 format=3 uid="uid://djgcgwi3mfrg2"]
+[gd_scene load_steps=13 format=3 uid="uid://djgcgwi3mfrg2"]
 
+[ext_resource type="Script" path="res://Scripts/base_manager.gd" id="1_h0hm8"]
 [ext_resource type="PackedScene" uid="uid://dy86xl8l5pa48" path="res://Scenes/player.tscn" id="1_sx6rq"]
 [ext_resource type="Texture2D" uid="uid://c70gl6glholhg" path="res://Assets/Envirement/background.png" id="2_k774o"]
 [ext_resource type="Texture2D" uid="uid://ci4gl2g3uh6fn" path="res://Assets/Envirement/middleground.png" id="3_wfyt8"]
 [ext_resource type="AudioStream" uid="uid://faeyut8lq26j" path="res://Assets/Sounds/Music/rpg_village02_loop.mp3" id="4_oqdmu"]
 [ext_resource type="Script" path="res://Scripts/SpawnManager.gd" id="5_5322j"]
+[ext_resource type="Theme" uid="uid://b8m300sjvsmdl" path="res://Assets/UI/Themes/main.tres" id="7_kk8vn"]
+[ext_resource type="PackedScene" uid="uid://de0vu4y84nxuu" path="res://Assets/UI/upgrade_card.tscn" id="8_ea6kd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_irnd8"]
+size = Vector2(40, 78)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvjgn"]
+size = Vector2(7, 76)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0xu8"]
+bg_color = Color(0.626125, 0.613546, 0.620778, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hb5uq"]
+bg_color = Color(0.494118, 0, 0.00392157, 1)
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
+
+[node name="base" type="Node2D" parent="."]
+script = ExtResource("1_h0hm8")
+
+[node name="Area2D_Left" type="Area2D" parent="base"]
+position = Vector2(-91, 95)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base/Area2D_Left"]
+z_index = 1
+position = Vector2(20, 39)
+shape = SubResource("RectangleShape2D_irnd8")
+
+[node name="Area2D_Right" type="Area2D" parent="base"]
+position = Vector2(51, 96)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base/Area2D_Right"]
+z_index = 1
+position = Vector2(20, 39)
+shape = SubResource("RectangleShape2D_irnd8")
+
+[node name="Area2D_Base" type="Area2D" parent="base"]
+position = Vector2(-4, 1)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base/Area2D_Base"]
+z_index = 1
+position = Vector2(4, 132)
+shape = SubResource("RectangleShape2D_cvjgn")
 
 [node name="envirement" type="Node2D" parent="."]
 texture_filter = 1
@@ -48,29 +96,96 @@ mix_target = 1
 script = ExtResource("5_5322j")
 
 [node name="spawner_left" type="Node2D" parent="Spawners"]
-position = Vector2(-342, 139)
+position = Vector2(-336, 146)
 
 [node name="spawner_right" type="Node2D" parent="Spawners"]
-position = Vector2(353, 138)
+position = Vector2(323, 144)
 
 [node name="GlobalUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="GlobalUI"]
+[node name="AreaRect" type="ColorRect" parent="GlobalUI"]
 layout_mode = 0
-offset_left = 50.0
+offset_left = 51.0
 offset_top = 96.0
-offset_right = 90.0
+offset_right = 91.0
 offset_bottom = 174.0
 color = Color(0.992157, 0.537255, 0.431373, 0.054902)
 
-[node name="ColorRect2" type="ColorRect" parent="GlobalUI"]
+[node name="AreaRect2" type="ColorRect" parent="GlobalUI"]
 layout_mode = 0
-offset_left = -87.0
+offset_left = -91.0
 offset_top = 95.0
-offset_right = -47.0
+offset_right = -51.0
 offset_bottom = 173.0
 color = Color(0.992157, 0.537255, 0.431373, 0.054902)
+
+[node name="WaveLabel" type="Label" parent="GlobalUI"]
+layout_mode = 0
+offset_left = -87.0
+offset_top = -211.0
+offset_right = 52.0
+offset_bottom = -171.0
+theme = ExtResource("7_kk8vn")
+text = "WAVE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaveNumberLabel" type="Label" parent="GlobalUI/WaveLabel"]
+layout_mode = 0
+offset_left = 123.0
+offset_top = -1.0
+offset_right = 163.0
+offset_bottom = 38.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="GlobalUI"]
+layout_mode = 0
+offset_left = -91.0
+offset_top = 191.0
+offset_right = 767.0
+offset_bottom = 279.0
+scale = Vector2(0.214427, 0.182451)
+theme = ExtResource("7_kk8vn")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 70
+theme_override_styles/background = SubResource("StyleBoxFlat_m0xu8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hb5uq")
+step = 1.0
+value = 100.0
+
+[node name="PlayerUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUI"]
+layout_mode = 0
+offset_left = -385.0
+offset_top = -154.0
+offset_right = 698.0
+offset_bottom = 156.0
+scale = Vector2(0.709456, 0.745154)
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ColorRect" parent="PlayerUI/HBoxContainer" instance=ExtResource("8_ea6kd")]
+layout_mode = 2
+
+[node name="ColorRect2" parent="PlayerUI/HBoxContainer" instance=ExtResource("8_ea6kd")]
+layout_mode = 2
+
+[node name="ColorRect3" parent="PlayerUI/HBoxContainer" instance=ExtResource("8_ea6kd")]
+layout_mode = 2
+
+[connection signal="body_entered" from="base/Area2D_Left" to="base" method="_on_area_2d_left_body_entered"]
+[connection signal="body_exited" from="base/Area2D_Left" to="base" method="_on_area_2d_left_body_exited"]
+[connection signal="body_entered" from="base/Area2D_Right" to="base" method="_on_area_2d_right_body_entered"]
+[connection signal="body_exited" from="base/Area2D_Right" to="base" method="_on_area_2d_right_body_exited"]
+[connection signal="body_entered" from="base/Area2D_Base" to="base" method="_on_area_2d_base_body_entered"]

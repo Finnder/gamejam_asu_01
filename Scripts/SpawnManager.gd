@@ -21,6 +21,7 @@ func _ready():
 # On spawner interval timer end
 func _on_spawn_timer_timeout():
 	spawn_enemy()
+	spawn_interval = current_wave / spawn_interval
 
 func spawn_enemy():
 	# Get a list of all child nodes and filter out non-spawners (like timers)
@@ -38,6 +39,8 @@ func spawn_enemy():
 
 	if spawner_position.name == "spawner_right":
 		enemy_instance.direction = Vector2(-1, 0) # move left
+		enemy_instance.get_node("Sprite2D").flip_h = true
+
 	elif spawner_position.name == "spawner_left":
 		enemy_instance.direction = Vector2(1, 0) # move right
 

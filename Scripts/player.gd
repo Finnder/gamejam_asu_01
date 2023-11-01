@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var player_attack_speed : float = 0.2
+@onready var player_attack_speed : float = 0.05
 @onready var attacking : bool = false
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 
@@ -26,6 +26,8 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+
+	# Input Handling
 	if Input.is_action_just_pressed("left") and !attacking:
 		attack_in_direction(POSITIONS.LEFT)
 		sprite_2d.flip_h = true
@@ -33,13 +35,6 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_pressed("right") and !attacking:
 		attack_in_direction(POSITIONS.RIGHT)
 		sprite_2d.flip_h = false
-
-	if position.x > 1:
-		sprite_2d.play("running")
-	elif position.x < -1:
-		sprite_2d.play("running")
-	else:
-		sprite_2d.play("idle")
 
 func attack_in_direction(direction: int) -> void:
 	tween = get_tree().create_tween()
@@ -54,6 +49,7 @@ func attack_in_direction(direction: int) -> void:
 
 	if !attacking:
 		attacking = true
+		sprite_2d.play("attack_01")
 		tween.play()
 	else:
 		print("Player already is attacking")
@@ -61,4 +57,16 @@ func attack_in_direction(direction: int) -> void:
 func finished_attacking():
 	print("player has finished attacking")
 	attacking = false
+	sprite_2d.play("idle")
 
+
+func _on_enemydetector_area_body_entered(body):
+	print(attacking)
+	if body.is_in_group("enemy") and attacking:
+		body.take_hit()
+		attacking = false
+
+
+func _on_enemydetector_area_body_exited(body):
+	if body.is_in_group("enemy"):
+		attacking = false
